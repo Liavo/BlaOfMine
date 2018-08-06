@@ -106,7 +106,6 @@ class Post {
   }
 
   _loadImage(imageFile, parentDivElement) {
-    let parentDivElement=[this._bgImageSelector, this._templateImageSelector, this.logoImageSelector_templateImageSelector]
     if (imageFile) {
       let img = document.createElement("img");
       img.className = "post";

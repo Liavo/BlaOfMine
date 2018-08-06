@@ -150,6 +150,7 @@ body {
   text-align: center;
   width: 100%;
   height: 40%;
+  z-index:4;
 }
 
 .navigation {
@@ -176,12 +177,19 @@ flex-direction: row;
 .navigation > #left-arrow{
     width: 15%;
 }
-.post-background{
-  z-index:1;
+.post-background > img {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
-.post-theme{
+.post-theme >img{
+  width: 100%;
+  height: 100%;
   z-index:2;
 }
-.post-logo{
-  z-index:3;
+.post-logo > img{
+  left: 38%;
+  width: 25%;
+  height: 25%;
+  z-index: 3;
 }
