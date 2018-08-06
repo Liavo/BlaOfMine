@@ -85,8 +85,9 @@ class Post {
   }
  
   convertImgToCanvas(imgElement) { 
-//     scaleAndDraw(this._canvas, this._ctx, imgElement, 1, 0, 0);
-    drawImageProp(this._ctx, imgElement  )
+    // scaleAndDraw(this._canvas, this._ctx, imgElement,1, 0, 0);
+    // drawImageProp(this._ctx, imgElement  )
+    this._ctx.drawImage(imgElement, 0, 0, this._canvas.width, this._canvas.height);
     let imgParent = imgElement.parentElement
     imgParent.removeChild(imgParent.children[0])
   }
@@ -101,7 +102,7 @@ class Post {
     this.convertInputToCanvasText();
 
     let link = document.getElementsByClassName('downloadButton')[0];
-    link.href = canvas.toDataURL();
+    link.href = canvas.toDataURL(img);
     link.download = "Post-1";
   }
 
