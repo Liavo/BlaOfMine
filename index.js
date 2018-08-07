@@ -10,7 +10,7 @@ document.getElementsByClassName("button-logo")[0].addEventListener("change", fun
   post.logo = e.target.files[0]
 }, false);
 document.getElementsByClassName("downloadButton")[0].addEventListener("click", function(e) {
-  post.convertAndDownloadPost(e)
+  post.convertAndDownloadPost()
 }, false);
 
 window.onload = function() {

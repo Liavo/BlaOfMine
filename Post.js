@@ -60,7 +60,10 @@ class Post {
   }
   
   set logo(imageFile) {
-    this._loadImage(imageFile, this.logoDivElement)
+    this._loadImage(imageFile, this.logoDivElement, 0.2, {
+      top: 10,
+      left: 200,
+    })
     this._logo = imageFile;
   }
 
@@ -84,25 +87,39 @@ class Post {
     document.getElementsByClassName("post")[0].removeChild(input[0]);
   }
  
-  convertImgToCanvas(imgElement) { 
+  convertImgToCanvas(imgElement,scaleFactor,position) { 
     // scaleAndDraw(this._canvas, this._ctx, imgElement,1, 0, 0);
     // drawImageProp(this._ctx, imgElement  )
-    this._ctx.drawImage(imgElement, 0, 0, this._canvas.width, this._canvas.height);
+    if (!scaleFactor) {
+      scaleFactor = 1
+    }
+    if (!position) {
+      position = {
+        left: 0,
+        top: 0
+      }
+    }
+    this._ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
     let imgParent = imgElement.parentElement
     imgParent.removeChild(imgParent.children[0])
   }
   
   convertAndDownloadPost() {
-    const imgElements = [this.bgImageElement, this.templateImageElement, this.logoImageElement]
+    const imgElements = [this.bgImageElement, this.templateImageElement]
     const imgElementFiltered = imgElements.filter(n => !!n);
     imgElementFiltered.forEach((img, i) => {
       this.convertImgToCanvas(img)
     })
-
-    this.convertInputToCanvasText();
+    if (this.logoImageElement) {
+      this.convertImgToCanvas(this.logoImageElement,0.25,{
+              left:196,
+      top:0,
+      })
+    }
+      this.convertInputToCanvasText();
 
     let link = document.getElementsByClassName('downloadButton')[0];
-    link.href = canvas.toDataURL(img);
+    link.href = canvas.toDataURL("image/png");
     link.download = "Post-1";
   }
 
@@ -110,6 +127,7 @@ class Post {
     if (imageFile) {
       let img = document.createElement("img");
       img.className = "post";
+      img.crossOrigin = "Anonymous";
       img.src = window.URL.createObjectURL(imageFile);
       img.onload = function() {
         window.URL.revokeObjectURL(img.src);
