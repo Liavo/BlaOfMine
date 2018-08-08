@@ -1,11 +1,5 @@
 
 
-// function scaleAndDraw(canvas, ctx, img, scaleFactor, x, y) {
-//   let w = canvas.width * scaleFactor;
-//   let h = canvas.height * scaleFactor;
-//   ctx.drawImage(img, 0, 0, w, h);
-//   return (canvas);
-// }
 let font = "22px Arial";
 
 function drawText(ctx, textValue) {

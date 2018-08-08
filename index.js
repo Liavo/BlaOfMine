@@ -20,9 +20,7 @@ window.onload = function() {
 
 
 
-// addEventListener('save-button', () => {
-//   convertInputToCanvasText()
-//   savePost()
+
 //   movePostToPostsCollection()
 //   cleanMainPost()
 //   createNewMainPost()

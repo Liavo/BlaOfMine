@@ -70,26 +70,15 @@ class Post {
   get logo() {
     return this._logo
   }
-  
-  set text(textInput) {
-    this._text(textInput, 'post-text')
-    this._text = textInput;
-  }
-  
-  get text() {
-    return this._text
-  }
-  
   convertInputToCanvasText() {
     let input = document.getElementsByClassName("textbox");
-    let textValue = document.getElementsByClassName("textbox")[0].value;
-    drawText(this._ctx, textValue);
-    document.getElementsByClassName("post")[0].removeChild(input[0]);
+   
+    drawText(this._ctx,input[0].value);
+    let removeInput= document.getElementsByClassName("post")[0]
+    removeInput.removeChild(input[0]);
   }
  
   convertImgToCanvas(imgElement,scaleFactor,position) { 
-    // scaleAndDraw(this._canvas, this._ctx, imgElement,1, 0, 0);
-    // drawImageProp(this._ctx, imgElement  )
     if (!scaleFactor) {
       scaleFactor = 1
     }
@@ -101,6 +90,8 @@ class Post {
     }
     this._ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
     let imgParent = imgElement.parentElement
+    let imgGetPost= imgParent.parentElement
+document.getElementById("frame-1").appendChild(imgGetPost)
     imgParent.removeChild(imgParent.children[0])
   }
   
@@ -116,6 +107,7 @@ class Post {
       top:0,
       })
     }
+    // document.getElementById("frame-1").appendChild(canvas)
       this.convertInputToCanvasText();
 
     let link = document.getElementsByClassName('downloadButton')[0];
