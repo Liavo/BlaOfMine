@@ -1,16 +1,18 @@
-let post = new Post(document.getElementById('myCanvas'))
+let mainPost = new Post(document.getElementById('myCanvas'))
 
 document.getElementsByClassName("button-background")[0].addEventListener("change", function(e) {
-  post.bgImage = e.target.files[0]
+  mainPost.bgImage = e.target.files[0]
 }, false);
 document.getElementsByClassName("button-theme")[0].addEventListener("change", function(e) {
-  post.templateImage = e.target.files[0]
+  mainPost.templateImage = e.target.files[0]
 }, false);
 document.getElementsByClassName("button-logo")[0].addEventListener("change", function(e) {
-  post.logo = e.target.files[0]
+  mainPost.logo = e.target.files[0]
 }, false);
 document.getElementsByClassName("downloadButton")[0].addEventListener("click", function(e) {
-  post.convertAndDownloadPost()
+  let miniPost = new Post(document.getElementById('frame-1'))
+  miniPost.copyPost(mainPost)
+  mainPost.convertAndDownloadPost()
 }, false);
 
 window.onload = function() {

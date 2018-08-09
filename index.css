@@ -28,12 +28,14 @@ body {
 
 .buttons {
   display: flex;
+  align-items: center;
   flex-direction: row;
   background-image: linear-gradient(to right, #242527, #333333, #333333, #333333, #242527);
   justify-content: space-around;
   margin-top: auto;
-  border-radius: 10px;
+  border-radius: 0px;
   min-height: 55px;
+  overflow: hidden;
 }
 
 #myCanvas {
@@ -123,11 +125,11 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 92vw;
-  height: 94vw;
+     height: 160vw;
 }
 
 .post {
+  display: flex;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -183,14 +185,10 @@ body {
 }
 
 .post-background>img {
-  width: 100%;
-  height: 100%;
   z-index: 1;
 }
 
 .post-theme>img {
-  width: 100%;
-  height: 100%;
   z-index: 2;
 }
 

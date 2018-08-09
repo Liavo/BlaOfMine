@@ -1,10 +1,7 @@
 let id = 0
+
 class Post {
-  constructor(canvas) {
-    canvas.width = 512;
-    canvas.height = 512;
-    this._canvas = canvas;
-    this._ctx = canvas.getContext('2d');
+  constructor(postElement) {
     this._id = id++;
     this._name = '';
     this._bgImage = null;
@@ -15,6 +12,22 @@ class Post {
     this._templateImageSelector = 'post-theme';
     this._logoImageSelector = 'post-logo';
 
+    this._buildPost()
+  }
+
+  _buildPost () {
+    let backgroundDiv = document.createElement('div');
+    backgroundDiv.className = "post-background";
+    let themeDiv = document.createElement('div');
+    themeDiv.className = "post-theme";
+    let logoDiv = document.createElement('div');
+    logoDiv.className = "post-logo";
+    let textbox = document.createElement('input');
+    textbox.className = "textbox";
+    document.getElementsByClassName("post")[0].appendChild(backgroundDiv); 
+    document.getElementsByClassName("post")[0].appendChild(themeDiv); 
+    document.getElementsByClassName("post")[0].appendChild(logoDiv); 
+    document.getElementsByClassName("post")[0].appendChild(textbox); 
   }
   
   get bgDivElement() {
@@ -70,10 +83,17 @@ class Post {
   get logo() {
     return this._logo
   }
+
+  copyPost (srcPost) {
+    this.bgImage = srcPost.bgImage
+    this.templateImage =srcPost.bgImage
+    this.logo=srcPost.logo
+  }
+
   convertInputToCanvasText() {
     let input = document.getElementsByClassName("textbox");
    
-    drawText(this._ctx,input[0].value);
+    drawText(ctx,input[0].value);
     let removeInput= document.getElementsByClassName("post")[0]
     removeInput.removeChild(input[0]);
   }
@@ -88,10 +108,14 @@ class Post {
         top: 0
       }
     }
-    this._ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
+  //   let canvas = document.createElement('myCanvas');
+  //   canvas.idname = "myCanvas";
+  //  let  c = document.getElementById("myCanvas");
+  //  let  ctx = c.getContext("2d");
+    ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
     let imgParent = imgElement.parentElement
     let imgGetPost= imgParent.parentElement
-document.getElementById("frame-1").appendChild(imgGetPost)
+// document.getElementById("frame-1").appendChild(imgGetPost)
     imgParent.removeChild(imgParent.children[0])
   }
   
@@ -103,12 +127,12 @@ document.getElementById("frame-1").appendChild(imgGetPost)
     })
     if (this.logoImageElement) {
       this.convertImgToCanvas(this.logoImageElement,0.25,{
-              left:196,
-      top:0,
+        left:196,
+        top:0,
       })
     }
     // document.getElementById("frame-1").appendChild(canvas)
-      this.convertInputToCanvasText();
+    this.convertInputToCanvasText();
 
     let link = document.getElementsByClassName('downloadButton')[0];
     link.href = canvas.toDataURL("image/png");
