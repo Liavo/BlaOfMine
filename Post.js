@@ -108,11 +108,10 @@ class Post {
         top: 0
       }
     }
-  //   let canvas = document.createElement('myCanvas');
-  //   canvas.idname = "myCanvas";
-  //  let  c = document.getElementById("myCanvas");
-  //  let  ctx = c.getContext("2d");
-    ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
+    let canvas = document.createElement('canvas');
+    canvas.className = "myCanvas";
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(imgElement, position.left, position.top, canvas.width * scaleFactor, canvas.height * scaleFactor);
     let imgParent = imgElement.parentElement
     let imgGetPost= imgParent.parentElement
 // document.getElementById("frame-1").appendChild(imgGetPost)
