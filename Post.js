@@ -76,10 +76,7 @@ class Post {
   }
   
   set logo(imageFile) {
-    this._loadImage(imageFile, this.logoDivElement, 0.2, {
-      top: 10,
-      left: 200,
-    })
+    this._loadImage(imageFile, this.logoDivElement)
     this._logo = imageFile;
   }
 
@@ -95,10 +92,9 @@ class Post {
 
   convertInputToCanvasText() {
     let input = document.getElementsByClassName("textbox");
-   
-    drawText(this._ctx,input[0].value);
-    let removeInput= document.getElementsByClassName("post")[0]
-    removeInput.removeChild(input[0]);
+    let textValue = input[0].value;
+    drawText(this._ctx, textValue);
+    document.getElementsByClassName("post")[0].removeChild(input[0]);
   }
  
   convertImgToCanvas(imgElement,scaleFactor,position) { 
@@ -114,7 +110,7 @@ class Post {
   
     this._ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
     let imgParent = imgElement.parentElement
-    let imgGetPost= imgParent.parentElement
+    // let imgGetPost= imgParent.parentElement
 // document.getElementById("frame-1").appendChild(imgGetPost)
     imgParent.removeChild(imgParent.children[0])
   }
@@ -122,11 +118,11 @@ class Post {
   convertAndDownloadPost() {
     this._canvas = document.createElement('canvas');
     this._canvas.className = "canvas";
-    this._ctx = this._canvas.getContext("2d");
+    this._ctx =this._canvas.getContext("2d");
     const imgElements = [this.bgImageElement, this.templateImageElement]
     const imgElementFiltered = imgElements.filter(n => !!n);
     imgElementFiltered.forEach((img, i) => {
-      this.convertImgToCanvas(img,this._canvas,this._ctx)
+      this.convertImgToCanvas(img)
     })
     if (this.logoImageElement) {
       this.convertImgToCanvas(this.logoImageElement,0.25,{

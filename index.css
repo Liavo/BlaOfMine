@@ -199,11 +199,56 @@ body {
   z-index: 3;
 }
 
-#frame-1>.post {
+#frame-1>.post >img {
   height: 13vw;
   width: 13vw;
   margin-top: 1vw;
   overflow: hidden;
   margin-left: 1vw;
   border-radius: 18px;
+}
+#frame-1 > .post-background>img{
+  height: 13vw;
+  width: 13vw;
+  margin-top: 1vw;
+  overflow: hidden;
+  margin-left: 1vw;
+  border-radius: 18px;
+}
+#frame-1 > .post-theme>img{
+  height: 13vw;
+  width: 13vw;
+  margin-top: 1vw;
+  overflow: hidden;
+  margin-left: 1vw;
+  border-radius: 18px;
+}
+#frame-1 > .post-logo>img{
+  height: 3vw;
+  width: 3vw;
+  margin-top: 1.3vw;
+  overflow: hidden;
+  margin-left: -9.2vw;
+  border-radius: 18px;
+}
+.canvas{
+  height: 13vw;
+  width: 13vw;
+  margin-top: 1vw;
+  overflow: hidden;
+  margin-left: 1vw;
+  border-radius: 18px;
+}
+#frame-1 > .textbox{
+  position: absolute;
+  margin-top: 25%;
+  resize: none;
+  background: transparent;
+  font-size: 25px;
+  border: none;
+  color: white;
+  text-align: center;
+  width: 75%;
+  height: 40%;
+  z-index: 4;
 }
