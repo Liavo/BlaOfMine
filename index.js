@@ -1,4 +1,4 @@
-let mainPost = new Post(document.getElementById('myCanvas'))
+let mainPost = new Post(document.getElementsByClassName('post')[0])
 
 document.getElementsByClassName("button-background")[0].addEventListener("change", function(e) {
   mainPost.bgImage = e.target.files[0]
@@ -14,12 +14,6 @@ document.getElementsByClassName("downloadButton")[0].addEventListener("click", f
   miniPost.copyPost(mainPost)
   mainPost.convertAndDownloadPost()
 }, false);
-
-window.onload = function() {
-  canvas = document.getElementById('myCanvas');
-  document.getElementsByClassName("textbox");
-}
-
 
 
 

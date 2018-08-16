@@ -2,8 +2,11 @@ let id = 0
 
 class Post {
   constructor(postElement) {
+    this._postElement = postElement;
     this._id = id++;
     this._name = '';
+    this._canvas= null;
+    this._ctx= null;
     this._bgImage = null;
     this._templateImage = null;
     this._logo = null;
@@ -24,34 +27,34 @@ class Post {
     logoDiv.className = "post-logo";
     let textbox = document.createElement('input');
     textbox.className = "textbox";
-    document.getElementsByClassName("post")[0].appendChild(backgroundDiv); 
-    document.getElementsByClassName("post")[0].appendChild(themeDiv); 
-    document.getElementsByClassName("post")[0].appendChild(logoDiv); 
-    document.getElementsByClassName("post")[0].appendChild(textbox); 
+    this._postElement.appendChild(backgroundDiv); 
+    this._postElement.appendChild(themeDiv); 
+    this._postElement.appendChild(logoDiv); 
+    this._postElement.appendChild(textbox); 
   }
   
   get bgDivElement() {
-    return document.getElementsByClassName(this._bgImageSelector)[0]
+    return this._postElement.getElementsByClassName(this._bgImageSelector)[0]
   }
   
   get templateDivElement() {
-    return document.getElementsByClassName(this._templateImageSelector)[0]
+    return this._postElement.getElementsByClassName(this._templateImageSelector)[0]
   }
   
   get logoDivElement() {
-    return document.getElementsByClassName(this._logoImageSelector)[0]
+    return this._postElement.getElementsByClassName(this._logoImageSelector)[0]
   }
   
   get bgImageElement() {
-    return document.getElementsByClassName(this._bgImageSelector)[0].children[0]
+    return this._postElement.getElementsByClassName(this._bgImageSelector)[0].children[0]
   }
   
   get templateImageElement() {
-    return document.getElementsByClassName(this._templateImageSelector)[0].children[0]
+    return this._postElement.getElementsByClassName(this._templateImageSelector)[0].children[0]
   }
 
   get logoImageElement() {
-    return document.getElementsByClassName(this._logoImageSelector)[0].children[0]
+    return this._postElement.getElementsByClassName(this._logoImageSelector)[0].children[0]
   }
 
   set bgImage(imageFile) {
@@ -86,14 +89,14 @@ class Post {
 
   copyPost (srcPost) {
     this.bgImage = srcPost.bgImage
-    this.templateImage =srcPost.bgImage
+    this.templateImage =srcPost.templateImage
     this.logo=srcPost.logo
   }
 
   convertInputToCanvasText() {
     let input = document.getElementsByClassName("textbox");
    
-    drawText(ctx,input[0].value);
+    drawText(this._ctx,input[0].value);
     let removeInput= document.getElementsByClassName("post")[0]
     removeInput.removeChild(input[0]);
   }
@@ -108,10 +111,8 @@ class Post {
         top: 0
       }
     }
-    let canvas = document.createElement('canvas');
-    canvas.className = "myCanvas";
-    let ctx = canvas.getContext("2d");
-    ctx.drawImage(imgElement, position.left, position.top, canvas.width * scaleFactor, canvas.height * scaleFactor);
+  
+    this._ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
     let imgParent = imgElement.parentElement
     let imgGetPost= imgParent.parentElement
 // document.getElementById("frame-1").appendChild(imgGetPost)
@@ -119,10 +120,13 @@ class Post {
   }
   
   convertAndDownloadPost() {
+    this._canvas = document.createElement('canvas');
+    this._canvas.className = "canvas";
+    this._ctx = this._canvas.getContext("2d");
     const imgElements = [this.bgImageElement, this.templateImageElement]
     const imgElementFiltered = imgElements.filter(n => !!n);
     imgElementFiltered.forEach((img, i) => {
-      this.convertImgToCanvas(img)
+      this.convertImgToCanvas(img,this._canvas,this._ctx)
     })
     if (this.logoImageElement) {
       this.convertImgToCanvas(this.logoImageElement,0.25,{
@@ -130,11 +134,11 @@ class Post {
         top:0,
       })
     }
-    // document.getElementById("frame-1").appendChild(canvas)
     this.convertInputToCanvasText();
+    document.getElementById("frame-1").appendChild(this._canvas)
 
     let link = document.getElementsByClassName('downloadButton')[0];
-    link.href = canvas.toDataURL("image/png");
+    link.href = this._canvas.toDataURL("image/png");
     link.download = "Post-1";
   }
 
