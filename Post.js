@@ -88,8 +88,9 @@ class Post {
     this.bgImage = srcPost.bgImage
     this.templateImage =srcPost.templateImage
     this.logo=srcPost.logo
+    this.text=srcPost.text
   }
-
+ 
   convertInputToCanvasText() {
     let input = document.getElementsByClassName("textbox");
     let textValue = input[0].value;
@@ -151,3 +152,16 @@ class Post {
     }
   }
 }
+// let minipost1=document.getElementById("frame-1");
+// let minipost2=document.getElementById("frame-2");
+// let minipost3=document.getElementById("frame-3");
+
+//   if (minipost1 === ""){
+//     minipost1.appendChild(this._canvas);
+//   }
+//   else if (minipost2 === ""){
+//     minipost2.appendChild(this._canvas);
+//   }
+//   else if(minipost3 === ""){
+//     minipost3.appendChild(this._canvas);
+//   }

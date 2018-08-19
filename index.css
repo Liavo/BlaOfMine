@@ -168,16 +168,19 @@ body {
   width: 15%;
   background-image: url("https://image.flaticon.com/icons/svg/463/463036.svg");
   overflow: hidden;
+  background-repeat: no-repeat;
 }
 
 .navigation>#frame-2 {
   width: 15%;
   background-image: url("https://image.flaticon.com/icons/svg/463/463036.svg");
+  background-repeat: no-repeat;
 }
 
 .navigation>#frame-3 {
   width: 15%;
   background-image: url("https://image.flaticon.com/icons/svg/463/463036.svg");
+  background-repeat: no-repeat;
 }
 
 .navigation>#left-arrow {
@@ -232,6 +235,7 @@ body {
   border-radius: 18px;
 }
 .canvas{
+  position: absolute;
   height: 13vw;
   width: 13vw;
   margin-top: 1vw;
@@ -251,4 +255,14 @@ body {
   width: 75%;
   height: 40%;
   z-index: 4;
+}
+
+#frame-1 > .post-background{
+  display:none;
+}
+#frame-1 > .post-theme{
+  display:none;
+}
+#frame-1 > .post-logo{
+  display:none;
 }
