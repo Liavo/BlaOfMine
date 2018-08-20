@@ -234,15 +234,6 @@ body {
   margin-left: -9.2vw;
   border-radius: 18px;
 }
-.canvas{
-  position: absolute;
-  height: 13vw;
-  width: 13vw;
-  margin-top: 1vw;
-  overflow: hidden;
-  margin-left: 1vw;
-  border-radius: 18px;
-}
 #frame-1 > .textbox{
   position: absolute;
   margin-top: 25%;
@@ -265,4 +256,14 @@ body {
 }
 #frame-1 > .post-logo{
   display:none;
+}
+#frame-1 > canvas {
+  cursor: pointer;
+  position: absolute;
+  height: 13vw;
+  width: 13vw;
+  margin-top: 1vw;
+  overflow: hidden;
+  margin-left: 1vw;
+  border-radius: 18px;
 }

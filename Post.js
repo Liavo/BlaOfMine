@@ -90,6 +90,12 @@ class Post {
     this.logo=srcPost.logo
     this.text=srcPost.text
   }
+  CreateCamvas (){
+    this._canvas = document.createElement('canvas');
+    this._canvas.className = "canvas";
+    this._ctx =this._canvas.getContext("2d");
+    return this._canvas
+  }
  
   convertInputToCanvasText() {
     let input = document.getElementsByClassName("textbox");
@@ -116,10 +122,7 @@ class Post {
     imgParent.removeChild(imgParent.children[0])
   }
   
-  convertAndDownloadPost() {
-    this._canvas = document.createElement('canvas');
-    this._canvas.className = "canvas";
-    this._ctx =this._canvas.getContext("2d");
+  convertPost() {
     const imgElements = [this.bgImageElement, this.templateImageElement]
     const imgElementFiltered = imgElements.filter(n => !!n);
     imgElementFiltered.forEach((img, i) => {
@@ -132,13 +135,26 @@ class Post {
       })
     }
     this.convertInputToCanvasText();
-    document.getElementById("frame-1").appendChild(this._canvas)
+    
+  //   let minipost1=document.getElementById("frame-1");
+  //   let minipost2=document.getElementById("frame-2");
+  //   let minipost3=document.getElementById("frame-3");
 
-    let link = document.getElementsByClassName('downloadButton')[0];
-    link.href = this._canvas.toDataURL("image/png");
-    link.download = "Post-1";
+  // if (minipost1.hasChildNodes()){
+  //   minipost2.appendChild(this._canvas);
+  // }
+  // else if (minipost2.hasChildNodes()){
+  //         minipost3.appendChild(this._canvas);
+  // }
+  // else {
+  //     document.getElementById("frame-1").appendChild(this._canvas)
+  // }
   }
-
+downloadPost(){
+  let link = document.getElementsByClassName('downloadButton')[0];
+  link.href = this._canvas.toDataURL("image/png");
+  link.download = "Post-1";
+}
   _loadImage(imageFile, parentDivElement) {
     if (imageFile) {
       let img = document.createElement("img");
@@ -152,16 +168,3 @@ class Post {
     }
   }
 }
-// let minipost1=document.getElementById("frame-1");
-// let minipost2=document.getElementById("frame-2");
-// let minipost3=document.getElementById("frame-3");
-
-//   if (minipost1 === ""){
-//     minipost1.appendChild(this._canvas);
-//   }
-//   else if (minipost2 === ""){
-//     minipost2.appendChild(this._canvas);
-//   }
-//   else if(minipost3 === ""){
-//     minipost3.appendChild(this._canvas);
-//   }
