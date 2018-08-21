@@ -15,18 +15,22 @@ document.getElementsByClassName("button-theme")[0].addEventListener("change", fu
 document.getElementsByClassName("button-logo")[0].addEventListener("change", function(e) {
   mainPost.logo = e.target.files[0]
 }, false);
+document.getElementsByClassName("textbox")[0].addEventListener("input", function(e) {
+  mainPost.text = e.target.value
+}, false);
 document.getElementsByClassName("downloadButton")[0].addEventListener("click", function(e) {
   if (miniPost1.isEmpty()){
-    const canvas = mainPost1.convertPostToCanvas()
-    mainPost1.downloadPost()
+    const canvas = mainPost.copyImageToCanvas(mainPost)
+    mainPost.downloadPost()
     miniPost1.copyPost(mainPost)
-    miniPost1.appendCanvas(canvas)
+    miniPost1.setCanvas(canvas)
   } 
-  
-
-  mainPost.convertPost()
-  miniPost.copyPost(mainPost)
-  emptyFrameElement.appendChild(canvas)
+  else if (miniPost2.isEmpty()){
+    const canvas = mainPost.convertPost()
+    mainPost.downloadPost()
+    miniPost2.copyPost(mainPost)
+    miniPost2.setCanvas(canvas)
+  }
 }, false);
 
 
