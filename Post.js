@@ -8,14 +8,18 @@ class Post {
     this._name = '';
     this._canvas= null;
     this._ctx= null;
-    this._bgImage = null;
-    this._templateImage = null;
-    this._logo = null;
     this._text = '';
-    this._bgImageSelector = 'post-background';
-    this._templateImageSelector = 'post-theme';
-    this._logoImageSelector = 'post-logo';
+    this._bgImage= null;
+    this._themeImage = null;
+    this._logoImage = null ;
+    this.logoElement= null;
+    this.bgElement= null;
+    this.themeElement = null;
+    // this._bgImageSelector = 'post-background';
+    // this._templateImageSelector = 'post-theme';
+    // this._logoImageSelector = 'post-logo';
     this._isEmpty = true;
+    
 
     this._buildPost()
     this.CreateCanvas()
@@ -40,56 +44,6 @@ class Post {
     this._postElement.appendChild(textbox); 
   }
   
-  get bgDivElement() {
-    return this._postElement.getElementsByClassName(this._bgImageSelector)[0]
-  }
-  
-  get templateDivElement() {
-    return this._postElement.getElementsByClassName(this._templateImageSelector)[0]
-  }
-  
-  get logoDivElement() {
-    return this._postElement.getElementsByClassName(this._logoImageSelector)[0]
-  }
-  
-  get bgImageElement() {
-    return this._postElement.getElementsByClassName(this._bgImageSelector)[0].children[0]
-  }
-  
-  get templateImageElement() {
-    return this._postElement.getElementsByClassName(this._templateImageSelector)[0].children[0]
-  }
-
-  get logoImageElement() {
-    return this._postElement.getElementsByClassName(this._logoImageSelector)[0].children[0]
-  }
-
-  set bgImage(imageFile) {
-    this._loadImage(imageFile, this.bgDivElement)
-    this._bgImage = imageFile;
-  }
-  
-  get bgImage() {
-    return this._bgImage
-  }
-  
-  set templateImage(imageFile) {
-    this._loadImage(imageFile, this.templateDivElement)
-    this._templateImage = imageFile;
-  }
-  
-  get templateImage() {
-    return this._templateImage
-  }
-  
-  set logo(imageFile) {
-    this._loadImage(imageFile, this.logoDivElement)
-    this._logo = imageFile;
-  }
-
-  get logo() {
-    return this._logo
-  }
   set text(input){
    this._text = input
   }
@@ -114,11 +68,11 @@ class Post {
   convertInputToCanvasText(postObj) {
     drawText(this._ctx, this._text);
 
-    postObj.removeInput();
+    postObj.resetInput();
     this.downloadPost();
     
   }
-  removeInput(){
+ resetInput(){
     this._text = ''
   }
  
@@ -140,12 +94,13 @@ class Post {
     this.convertInputToCanvasText();
     imgParent.removeChild(imgParent.children[0])
   }
-  copyImageToCanvas(postObj) {
+
+  copyImageToCanvas() {
     this.CreateCanvas ()
     
-    const imgElements = postObj.getImages()
+    const imgElements = this.getImages()
     
-    const imgElementsLogo = postObj.getLogo()
+    const imgElementsLogo = this.getLogo()
 
     const imgElementFiltered = imgElements.filter(n => !!n);
     imgElementFiltered.forEach((img, i) => {
@@ -159,12 +114,12 @@ class Post {
     }
 
   }
-  getImages(){
-  return  [this._bgImage,this._templateImage]
+  getImages() {
+    return  [ this.bgElement,this.themeElement]
   
   }
   getLogo(){
-    return this._logo
+    return this.logoElement
   }
   downloadPost(){
     let link = document.getElementsByClassName('downloadButton')[0];
@@ -177,20 +132,69 @@ class Post {
   }
 
   setCanvas(canvas){
-    postElement.appendChild(canvas);
+    this._postElement.appendChild(canvas);
     this.isEmpty = false
   }
 
-  _loadImage(imageFile, parentDivElement) {
-    if (imageFile) {
+  setBackgroundImage(backgroundFile) {
+      this.bgImage = backgroundFile;
+      this.createBg();
+    }
+
+  setThemeImage(themeFile) {
+    this.themeImage = themeFile;
+    this.createTheme();
+  }
+
+  setLogoImage(logoFile){
+    this.logoImage = logoFile;
+    this.createLogo();
+  }
+
+  createBg() {
+    let that = this;
       let img = document.createElement("img");
       img.className = "post";
       img.crossOrigin = "Anonymous";
-      img.src = window.URL.createObjectURL(imageFile);
+      img.src = window.URL.createObjectURL(this.bgImage);
+      let parentDivElement = this._postElement.getElementsByClassName('post-background')[0]
       img.onload = function() {
         window.URL.revokeObjectURL(img.src);
         parentDivElement.appendChild(img);
+        that.bgElement = parentDivElement.children[0];
       }
+  }
+
+  createTheme() {
+    let that = this;
+    let img = document.createElement("img");
+    img.className = "post";
+    img.crossOrigin = "Anonymous";
+    img.src = window.URL.createObjectURL(this.themeImage);
+    let parentDivElement = this._postElement.getElementsByClassName('post-theme')[0]
+    img.onload = function() {
+      window.URL.revokeObjectURL(img.src);
+      parentDivElement.appendChild(img);
+      that.themeElement = parentDivElement.children[0];
     }
   }
+
+  createLogo() {
+    let that = this;
+    let img = document.createElement("img");
+    img.className = "post";
+    img.crossOrigin = "Anonymous";
+    img.src = window.URL.createObjectURL(this.logoImage);
+    let parentDivElement = this._postElement.getElementsByClassName('post-logo')[0]
+    img.onload = function() {
+      window.URL.revokeObjectURL(img.src);
+      parentDivElement.appendChild(img);
+      that.logoElement = parentDivElement.children[0];
+    }
+  }
+
+ 
+
+
 }
+
