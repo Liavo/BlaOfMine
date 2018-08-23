@@ -267,3 +267,23 @@ body {
   margin-left: 1vw;
   border-radius: 18px;
 }
+#frame-2 > canvas {
+  cursor: pointer;
+  position: absolute;
+  height: 13vw;
+  width: 13vw;
+  margin-top: 1vw;
+  overflow: hidden;
+  margin-left: 1vw;
+  border-radius: 18px;
+}
+#frame-3 > canvas {
+  cursor: pointer;
+  position: absolute;
+  height: 13vw;
+  width: 13vw;
+  margin-top: 1vw;
+  overflow: hidden;
+  margin-left: 1vw;
+  border-radius: 18px;
+}

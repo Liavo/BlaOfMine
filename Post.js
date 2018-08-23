@@ -12,9 +12,9 @@ class Post {
     this._bgImage= null;
     this._themeImage = null;
     this._logoImage = null ;
-    this.logoElement= null;
     this.bgElement= null;
     this.themeElement = null;
+    this.logoElement= null;
     // this._bgImageSelector = 'post-background';
     // this._templateImageSelector = 'post-theme';
     // this._logoImageSelector = 'post-logo';
@@ -22,7 +22,6 @@ class Post {
     
 
     this._buildPost()
-    this.CreateCanvas()
   }
 
   _buildPost () {
@@ -52,31 +51,32 @@ class Post {
   }
 
   copyPost (srcPost) {
-    this._bgImage = srcPost.bgImage
-    this._templateImage = srcPost.templateImage
-    this._logo = srcPost.logo
-    this._text = srcPost.text
+
+    this.bgElement = srcPost.bgElement
+    this.themeElement = srcPost.themeElement
+    this.logoElement = srcPost.logoElement
+    this._text = srcPost._text
   }
 
   CreateCanvas (){
     this._canvas = document.createElement('canvas');
-    this._canvas.className = "canvas";
+    // this._canvas.className = "canvas";
     this._ctx =this._canvas.getContext("2d");
-    return this._canvas
   }
  
-  convertInputToCanvasText(postObj) {
+  convertInputToCanvasText() {
     drawText(this._ctx, this._text);
 
-    postObj.resetInput();
-    this.downloadPost();
+    this.resetInput();
+    // this.downloadPost();
     
   }
  resetInput(){
     this._text = ''
+    return this._text
   }
  
-  convertImgToCanvas(imgElement,scaleFactor,position) { 
+  convertImgToCanvas(imgElement, scaleFactor, position) { 
     if (!scaleFactor) {
       scaleFactor = 1
     }
@@ -90,13 +90,11 @@ class Post {
   
     this._ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
     let imgParent = imgElement.parentElement
-
-    this.convertInputToCanvasText();
     imgParent.removeChild(imgParent.children[0])
   }
 
   copyImageToCanvas() {
-    this.CreateCanvas ()
+    this.CreateCanvas()
     
     const imgElements = this.getImages()
     
@@ -112,29 +110,35 @@ class Post {
         top:0,
       })
     }
+    this.convertInputToCanvasText();
 
   }
+  
+  setCanvas() {
+    this._postElement.appendChild(this._canvas);
+    this._isEmpty = false
+  }
+
   getImages() {
     return  [ this.bgElement,this.themeElement]
   
   }
+
   getLogo(){
     return this.logoElement
   }
+
   downloadPost(){
-    let link = document.getElementsByClassName('downloadButton')[0];
-    link.href = this._canvas.toDataURL("image/png");
-    link.download = "Post-1";
+    // let link = document.getElementsByClassName('downloadButton')[0];
+    // let canvas =this._canvas
+    // link.href = canvas.toDataURL("image/png");
+    // link.download = "Post-1";
   }
 
   isEmpty(){
     return this._isEmpty;
   }
 
-  setCanvas(canvas){
-    this._postElement.appendChild(canvas);
-    this.isEmpty = false
-  }
 
   setBackgroundImage(backgroundFile) {
       this.bgImage = backgroundFile;

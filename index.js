@@ -20,16 +20,22 @@ document.getElementsByClassName("textbox")[0].addEventListener("input", function
 }, false);
 document.getElementsByClassName("downloadButton")[0].addEventListener("click", function(e) {
   if (miniPost1.isEmpty()){
-    const canvas = mainPost.copyImageToCanvas()
     mainPost.downloadPost()
     miniPost1.copyPost(mainPost)
-    miniPost1.setCanvas(canvas)
+    miniPost1.copyImageToCanvas()
+    miniPost1.setCanvas()
   } 
   else if (miniPost2.isEmpty()){
-    const canvas = mainPost.convertPost()
     mainPost.downloadPost()
     miniPost2.copyPost(mainPost)
-    miniPost2.setCanvas(canvas)
+    miniPost2.copyImageToCanvas()
+    miniPost2.setCanvas()
+  }
+  else if (miniPost3.isEmpty()){
+    mainPost.downloadPost()
+    miniPost3.copyPost(mainPost)
+    miniPost3.copyImageToCanvas()
+    miniPost3.setCanvas()
   }
 }, false);
 
