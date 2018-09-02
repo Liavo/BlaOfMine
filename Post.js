@@ -15,32 +15,29 @@ class Post {
     this.bgElement= null;
     this.themeElement = null;
     this.logoElement= null;
-    // this._bgImageSelector = 'post-background';
-    // this._templateImageSelector = 'post-theme';
-    // this._logoImageSelector = 'post-logo';
     this._isEmpty = true;
-    
+    this.backgroundDiv = null
 
     this._buildPost()
   }
 
   _buildPost () {
-    let backgroundDiv = document.createElement('div');
-    backgroundDiv.className = "post-background";
+    this.backgroundDiv = document.createElement('div');
+    this.backgroundDiv.className = "post-background";
 
-    let themeDiv = document.createElement('div');
-    themeDiv.className = "post-theme";
+    this.themeDiv = document.createElement('div');
+    this.themeDiv.className = "post-theme";
 
-    let logoDiv = document.createElement('div');
-    logoDiv.className = "post-logo";
+    this.logoDiv = document.createElement('div');
+    this.logoDiv.className = "post-logo";
 
-    let textbox = document.createElement('input');
-    textbox.className = "textbox";
+    this.textbox = document.createElement('input');
+    this.textbox.className = "textbox";
 
-    this._postElement.appendChild(backgroundDiv); 
-    this._postElement.appendChild(themeDiv); 
-    this._postElement.appendChild(logoDiv); 
-    this._postElement.appendChild(textbox); 
+    this._postElement.appendChild(this.backgroundDiv); 
+    this._postElement.appendChild(this.themeDiv); 
+    this._postElement.appendChild(this.logoDiv); 
+    this._postElement.appendChild(this.textbox); 
   }
   
   set text(input){
@@ -56,11 +53,12 @@ class Post {
     this.themeElement = srcPost.themeElement
     this.logoElement = srcPost.logoElement
     this._text = srcPost._text
+
+    this.backgroundDiv.appendChild(this.bgElement)
   }
 
   CreateCanvas (){
     this._canvas = document.createElement('canvas');
-    // this._canvas.className = "canvas";
     this._ctx =this._canvas.getContext("2d");
   }
  
@@ -68,7 +66,6 @@ class Post {
     drawText(this._ctx, this._text);
 
     this.resetInput();
-    // this.downloadPost();
     
   }
  resetInput(){
@@ -89,8 +86,8 @@ class Post {
     }
   
     this._ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
-    let imgParent = imgElement.parentElement
-    imgParent.removeChild(imgParent.children[0])
+    // let imgParent = imgElement.parentElement
+    // imgParent.removeChild(imgParent.children[0])
   }
 
   copyImageToCanvas() {
@@ -130,8 +127,7 @@ class Post {
 
   downloadPost(){
     // let link = document.getElementsByClassName('downloadButton')[0];
-    // let canvas =this._canvas
-    // link.href = canvas.toDataURL("image/png");
+    // link.href = this._canvas.toDataURL("image/png");
     // link.download = "Post-1";
   }
 
@@ -197,8 +193,16 @@ class Post {
     }
   }
 
- 
 
+  removeImage() {
+    this.backgroundDiv.removeChild()
+    this.bgElement = null;
+    this.themeDiv.removeChild()
+    this.themeElement = null;
+    this.logoDiv.removeChild()
+    this.logoElement = null;
+  }
 
 }
+
 

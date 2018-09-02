@@ -1,4 +1,5 @@
 let mainPost = new Post(document.getElementsByClassName('post')[0]);
+let mainScreen = document.getElementsByClassName("post")[0];
 let frame1Element = document.getElementById("frame-1");
 let frame2Element = document.getElementById("frame-2");
 let frame3Element = document.getElementById("frame-3");
@@ -39,5 +40,7 @@ document.getElementsByClassName("downloadButton")[0].addEventListener("click", f
   }
 }, false);
 
-
-
+frame1Element.addEventListener("click", function(e) {
+  mainPost.copyPost(miniPost1)
+ console.log("Hey")
+}, false);
