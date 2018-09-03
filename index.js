@@ -27,7 +27,7 @@ document.getElementsByClassName("downloadButton")[0].addEventListener("click", f
     miniPost1.setCanvas()
 
     mainPost.removeImage()
-    mainPost.removeText()
+    mainPost.resetInput()
   } 
   else if (miniPost2.isEmpty()){
     mainPost.downloadPost()

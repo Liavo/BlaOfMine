@@ -55,9 +55,11 @@ class Post {
     this.themeElement = srcPost.themeElement
     this.logoElement = srcPost.logoElement
     this._text = srcPost._text
-
+    this.textbox.value = srcPost._text
     this.backgroundDiv.appendChild(this.bgElement)
     this.themeDiv.appendChild(this.themeElement)
+    this._postElement.appendChild(this.textbox); 
+
     // this.logoDiv.appendChild(this.logoElement)
   }
 
@@ -68,10 +70,12 @@ class Post {
  
   convertInputToCanvasText() {
     drawText(this._ctx, this._text);
+
     
   }
  resetInput(){
     this._text = ''
+    this.textbox.value = ''
     return this._text
   }
  
@@ -195,11 +199,11 @@ class Post {
 
 
   removeImage() {
-    this.backgroundDiv.removeChild()
+    // this.backgroundDiv.removeChild()
     this.bgElement = null;
-    this.themeDiv.removeChild()
+    // this.themeDiv.removeChild()
     this.themeElement = null;
-    this.logoDiv.removeChild()
+    // this.logoDiv.removeChild()
     this.logoElement = null;
   }
 
