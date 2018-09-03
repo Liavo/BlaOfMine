@@ -25,22 +25,36 @@ document.getElementsByClassName("downloadButton")[0].addEventListener("click", f
     miniPost1.copyPost(mainPost)
     miniPost1.copyImageToCanvas()
     miniPost1.setCanvas()
+
+    mainPost.removeImage()
+    mainPost.removeText()
   } 
   else if (miniPost2.isEmpty()){
     mainPost.downloadPost()
     miniPost2.copyPost(mainPost)
     miniPost2.copyImageToCanvas()
     miniPost2.setCanvas()
+
+    mainPost.removeImage()
+    mainPost.resetInput()
   }
   else if (miniPost3.isEmpty()){
     mainPost.downloadPost()
     miniPost3.copyPost(mainPost)
     miniPost3.copyImageToCanvas()
     miniPost3.setCanvas()
+    
+    mainPost.removeImage()
+    mainPost.resetInput()
   }
 }, false);
 
 frame1Element.addEventListener("click", function(e) {
   mainPost.copyPost(miniPost1)
- console.log("Hey")
+}, false);
+frame2Element.addEventListener("click", function(e) {
+  mainPost.copyPost(miniPost2)
+}, false);
+frame3Element.addEventListener("click", function(e) {
+  mainPost.copyPost(miniPost3)
 }, false);

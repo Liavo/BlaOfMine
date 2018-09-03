@@ -16,8 +16,10 @@ class Post {
     this.themeElement = null;
     this.logoElement= null;
     this._isEmpty = true;
-    this.backgroundDiv = null
-
+    this.backgroundDiv = null;
+    this.themeDiv = null;
+    this.logoDiv = null; 
+    this.textbox = null;
     this._buildPost()
   }
 
@@ -55,6 +57,8 @@ class Post {
     this._text = srcPost._text
 
     this.backgroundDiv.appendChild(this.bgElement)
+    this.themeDiv.appendChild(this.themeElement)
+    // this.logoDiv.appendChild(this.logoElement)
   }
 
   CreateCanvas (){
@@ -64,8 +68,6 @@ class Post {
  
   convertInputToCanvasText() {
     drawText(this._ctx, this._text);
-
-    this.resetInput();
     
   }
  resetInput(){
@@ -86,8 +88,6 @@ class Post {
     }
   
     this._ctx.drawImage(imgElement, position.left, position.top, this._canvas.width * scaleFactor, this._canvas.height * scaleFactor);
-    // let imgParent = imgElement.parentElement
-    // imgParent.removeChild(imgParent.children[0])
   }
 
   copyImageToCanvas() {
